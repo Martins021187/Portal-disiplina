@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Materi Kuliah</title>
+    <style>
+        /* ===== RESET & GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1em;
+            opacity: 0.85;
+        }
+
+        /* ===== NAVIGASI ===== */
+        nav {
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #1a73e8;
+            font-weight: bold;
+            padding: 8px 18px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        nav a:hover {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* ===== SECTION ===== */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* ===== CARD ===== */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card h2 {
+            color: #1a73e8;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #e8f0fe;
+            padding-bottom: 8px;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        /* ===== TOMBOL DOWNLOAD ===== */
+        .btn-download {
+            display: inline-block;
+            background-color: #1a73e8;
+            color: white;
+            padding: 9px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+            margin-top: 5px;
+        }
+
+        .btn-download:hover {
+            background-color: #0d47a1;
+        }
+
+        /* ===== BADGE PERTEMUAN ===== */
+        .badge {
+            background-color: #e8f0fe;
+            color: #1a73e8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* ===== TABEL SILABUS ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+
+        th {
+            background-color: #1a73e8;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 11px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9ff;
+        }
+
+        tr:hover {
+            background-color: #e8f0fe;
+        }
+
+        /* ===== INFO BOX ===== */
+        .info-box {
+            background: linear-gradient(135deg, #e8f0fe, #d2e3fc);
+            border-left: 4px solid #1a73e8;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .info-box h3 {
+            color: #1a73e8;
+            margin-bottom: 8px;
+        }
+
+        .info-box p, .info-box li {
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .info-box ul {
+            padding-left: 20px;
+        }
+
+        /* ===== GRID MODUL ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #1a73e8;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #a8d1ff;
+            text-decoration: none;
+        }
+
+        /* ===== PROFIL DOSEN ===== */
+        .profil-box {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .profil-foto {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            flex-shrink: 0;
+        }
+
+        .profil-info h3 {
+            color: #1a73e8;
+            font-size: 1.3em;
+            margin-bottom: 6px;
+        }
+
+        .profil-info p {
+            color: #555;
+            margin-bottom: 4px;
+            font-size: 0.95em;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.5em; }
+            nav a { font-size: 0.85em; padding: 6px 12px; }
+            .profil-box { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <h1>📚 Portál Materiál Hanorin</h1>
+    <p>Materia: Konseitu Sistema Baze-Dadus | Semestre Impar 2026</p>
+    <p>Dosente: Joao Antonio Martins, S.Kom., M.Kom</p>
+</header>
+
+<!-- ===== NAVIGASI ===== -->
+<nav>
+    <a href="#" onclick="tampilkan('beranda')">🏠 Beranda</a>
+    <a href="#" onclick="tampilkan('silabus')">📋 Silabus</a>
+    <a href="#" onclick="tampilkan('ppt')">📊 PPT</a>
+    <a href="#" onclick="tampilkan('modul')">📖 Modul</a>
+    <a href="#" onclick="tampilkan('tugas')">✏️ Tugas</a>
+    <a href="#" onclick="tampilkan('kontak')">📞 Kontak</a>
+</nav>
+
+<!-- ===== KONTEN ===== -->
+<div class="container">
+
+    <!-- BERANDA -->
+    <div id="beranda" class="section active">
+        <div class="info-box">
+            <h3>👋 Vemvindu!</h3>
+            <p>Website ida-ne'e kontein materiá hanorin nian hotu-hotu ne'ebé bele asesu iha tempu no iha ne'ebé de'it.</p>
+        </div>
+
+        <div class="card">
+            <h2>📌 Informasaun Konaba Materia</h2>
+            <table>
+                <tr><td><strong>Materia</strong></td><td>Konseitu Sistema Baze-Dadus</td></tr>
+                <tr><td><strong>Kode Materia</strong></td><td>TICP-11</td></tr>
+                <tr><td><strong>Kreditu</strong></td><td>6 SKS</td></tr>
+                <tr><td><strong>Semestre</strong></td><td>Impar 2026</td></tr>
+                <tr><td><strong>Loron/Horas</strong></td><td>Senin, 08.00 - 10.30 WIB</td></tr>
+                <tr><td><strong>Lab</strong></td><td>CIII1-L01</td></tr>
+                <tr><td><strong>Dosente</strong></td><td>Joao Antonio Martins,S.Kom.,M.Kom</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>📣 Pengumuman Terbaru</h2>
+            <div class="badge">🔴 Terbaru</div>
+            <p><strong>UTS</strong> akan dilaksanakan pada minggu ke-8. Materi yang diujikan adalah Pertemuan 1-7.</p>
+            <div class="badge" style="background:#e6f4ea; color:#2d7a2d;">✅ Info</div>
+            <p>Modul 3 sudah tersedia. Silakan download di menu Modul.</p>
+        </div>
+    </div>
+
+    <!-- SILABUS -->
+    <div id="silabus" class="section">
+        <div class="card">
+            <h2>📋 Silabus Perkuliahan</h2>
+            <p>Berikut adalah rencana materi perkuliahan selama 1 semester:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pertemuan</th>
+                        <th>Topik</th>
+                        <th>Deskripsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Pengenalan Web</td><td>Sejarah, cara kerja internet & web</td></tr>
+                    <tr><td>2</td><td>HTML Dasar</td><td>Struktur HTML, tag-tag dasar</td></tr>
+                    <tr><td>3</td><td>HTML Lanjutan</td><td>Form, tabel, media</td></tr>
+                    <tr><td>4</td><td>CSS Dasar</td><td>Selector, properti, nilai CSS</td></tr>
+                    <tr><td>5</td><td>CSS Lanjutan</td><td>Flexbox, Grid, Responsive</td></tr>
+                    <tr><td>6</td><td>JavaScript Dasar</td><td>Variabel, fungsi, event</td></tr>
+                    <tr><td>7</td><td>JavaScript Lanjutan</td><td>DOM manipulation, fetch API</td></tr>
+                    <tr><td>8</td><td colspan="2" style="text-align:center; color:#e53935; font-weight:bold;">🔴 UJIAN TENGAH SEMESTER (UTS)</td></tr>
+                    <tr><td>9</td><td>Bootstrap</td><td>Framework CSS populer</td></tr>
+                    <tr><td>10</td><td>PHP Dasar</td><td>Sintaks PHP, variabel, kondisi</td></tr>
+                    <tr><td>11</td><td>PHP & Database</td><td>Koneksi MySQL dengan PHP</td></tr>
+                    <tr><td>12</td><td>CRUD Application</td><td>Create, Read, Update, Delete</td></tr>
+                    <tr><td>13</td><td>Session & Cookie</td><td>Autentikasi pengguna</td></tr>
+                    <tr><td>14</td><td>Deployment</td><td>Upload website ke hosting</td></tr>
+                    <tr><td>15</td><td>Review & Presentasi</td><td>Presentasi proyek akhir</td></tr>
+                    <tr><td>16</td><td colspan="2" style="text-align:center; color:#e53935; font-weight:bold;">🔴 UJIAN AKHIR SEMESTER (UAS)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>📊 Komponen Penilaian</h2>
+            <table>
+                <thead>
+                    <tr><th>Komponen</th><th>Bobot</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>✏️ Tugas Harian</td><td>20%</td></tr>
+                    <tr><td>📝 Kuis</td><td>10%</td></tr>
+                    <tr><td>📋 UTS</td><td>30%</td></tr>
+                    <tr><td>🎯 UAS</td><td>40%</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- PPT -->
+    <div id="ppt" class="section">
+        <div class="card">
+            <h2>📊 Slide Presentasi (PPT)</h2>
+            <p>Klik tombol download untuk mengunduh file presentasi setiap pertemuan.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="badge">Pertemuan 1</div>
+                <h2>Pengenalan Web</h2>
+                <p>Materi tentang sejarah internet, cara kerja web, dan pengenalan HTML.</p>
+                <a href="PPT/pertemuan1.pptx" class="btn-download">⬇️ Download PPT</a>
+            </div>
+
+            <div class="card">
+                <div class="badge">Pertemuan 2</div>
+                <h2>HTML Dasar</h2>
+                <p>Struktur dasar HTML, tag-tag penting dan cara penggunaannya.</p>
+                <a href="PPT/pertemuan2.pptx" class="btn-download">⬇️ Download PPT</a>
+            </div>
+
+            <div class="card">
+                <div class="badge">Pertemuan 3</div>
+                <h2>HTML Lanjutan</h2>
+                <p>Form, tabel, gambar, video dan elemen multimedia dalam HTML.</p>
+                <a href="PPT/pertemuan3.pptx" class="btn-download">⬇️ Download PPT</a>
+            </div>
+
+            <div class="card">
+                <div class="badge">Pertemuan 4</div>
+                <h2>CSS Dasar</h2>
+                <p>Pengenalan CSS, selector, properti dan cara styling halaman web.</p>
+                <a href="PPT/pertemuan4.pptx" class="btn-download">⬇️ Download PPT</a>
+            </div>
+
+            <div class="card">
+                <div class="badge">Pertemuan 5</div>
+                <h2>CSS Lanjutan</h2>
+                <p>Flexbox, CSS Grid, dan teknik membuat tampilan responsif.</p>
+                <a href="PPT/pertemuan5.pptx" class="btn-download">⬇️ Download PPT</a>
+            </div>
+
+            <div class="card">
+                <div class="badge">Pertemuan 6</div>
+                <h2>JavaScript Dasar</h2>
+                <p>Variabel, tipe data, fungsi, dan penanganan event di JavaScript.</p>
+                <a href="PPT/pertemuan6.pptx" class="btn-download">⬇️ Download PPT</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODUL -->
+    <div id="modul" class="section">
+        <div class="card">
+            <h2>📖 Modul Pembelajaran</h2>
+            <p>Modul lengkap yang bisa dipelajari secara mandiri oleh mahasiswa.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>📘 Modul 1</h2>
+                <div class="badge">HTML & CSS</div>
+                <p>Panduan lengkap belajar HTML dan CSS dari dasar hingga mahir.</p>
+                <a href="Modul/modul1.pdf" class="btn-download">⬇️ Download PDF</a>
+            </div>
+
+            <div class="card">
+                <h2>📗 Modul 2</h2>
+                <div class="badge">JavaScript</div>
+                <p>Panduan belajar JavaScript untuk pemula hingga tingkat menengah.</p>
+                <a href="Modul/modul2.pdf" class="btn-download">⬇️ Download PDF</a>
+            </div>
+
+            <div class="card">
+                <h2>📙 Modul 3</h2>
+                <div class="badge">PHP & MySQL</div>
+                <p>Panduan membuat aplikasi web dinamis dengan PHP dan database MySQL.</p>
+                <a href="Modul/modul3.pdf" class="btn-download">⬇️ Download PDF</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- TUGAS -->
+    <div id="tugas" class="section">
+        <div class="card">
+            <h2>✏️ Daftar Tugas</h2>
+            <p>Kerjakan tugas berikut sebelum deadline yang ditentukan.</p>
+        </div>
+
+        <div class="card">
+            <div class="badge" style="background:#fce4ec; color:#c62828;">⏰ Deadline: 20 Januari 2025</div>
+            <h2>Tugas 1 - Membuat Halaman Profil</h2>
+            <p>Buat halaman HTML sederhana berisi profil diri sendiri lengkap dengan foto, biodata, dan hobi menggunakan HTML & CSS dasar.</p>
+            <div class="info-box">
+                <h3>📌 Ketentuan:</h3>
+                <ul>
+                    <li>Menggunakan HTML5 dan CSS3</li>
+                    <li>Minimal 3 halaman (index, profil, kontak)</li>
+                    <li>Responsive di mobile dan desktop</li>
+                    <li>Upload ke GitHub Pages</li>
+                </ul>
+            </div>
+            <a href="Tugas/tugas1.pdf" class="btn-download">⬇️ Download Soal Lengkap</a>
+        </div>
+
+        <div class="card">
+            <div class="badge" style="background:#fce4ec; color:#c62828;">⏰ Deadline: 10 Februari 2025</div>
+            <h2>Tugas 2 - Website Portfolio</h2>
+            <p>Buat website portfolio pribadi menggunakan HTML, CSS, dan JavaScript. Website harus memiliki animasi dan interaksi pengguna.</p>
+            <a href="Tugas/tugas2.pdf" class="btn-download">⬇️ Download Soal Lengkap</a>
+        </div>
+    </div>
+
+    <!-- KONTAK -->
+    <div id="kontak" class="section">
+        <div class="card">
+            <h2>📞 Informasi Dosen</h2>
+            <div class="profil-box">
+                <div class="profil-foto">👨‍🏫</div>
+                <div class="profil-info">
+                    <h3>Dr. Nama Dosen, M.Kom</h3>
+                    <p>📧 Email: joaomartins02111987@gmail.com.ac.id</p>
+                    <p>📱 WhatsApp: +670 76588859</p>
+                    <p>🏢 Ruangan: Gedung A, Lantai 2, R.205</p>
+                    <p>🕐 Jam Konsultasi: Selasa & Kamis, 13.00 - 15.00 WIB</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🔗 Link Penting</h2>
+            <table>
+                <tr>
+                    <td>📁 Repository GitHub</td>
+                    <td><a href="https://github.com/username/materi-kuliah" style="color:#1a73e8;">github.com/username/materi-kuliah</a></td>
+                </tr>
+                <tr>
+                    <td>📝 Google Classroom</td>
+                    <td><a href="#" style="color:#1a73e8;">classroom.google.com</a></td>
+                </tr>
+                <tr>
+                    <td>💬 Grup WhatsApp</td>
+                    <td><a href="#" style="color:#1a73e8;">Klik untuk bergabung</a></td>
+                </tr>
+                <tr>
+                    <td>📺 YouTube Channel</td>
+                    <td><a href="#" style="color:#1a73e8;">youtube.com/@namadosen</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>© 2026 Portal Materi Hanorin | Dibuat dengan ❤️ menggunakan HTML & GitHub Pages</p>
+    <p style="margin-top:8px; opacity:0.8; font-size:0.85em;">
+        <a href="#">Beranda</a> · 
+        <a href="#">Silabus</a> · 
+        <a href="#">PPT</a> · 
+        <a href="#">Modul</a>
+    </p>
+</footer>
+
+<!-- ===== JAVASCRIPT NAVIGASI ===== -->
+<script>
+    function tampilkan(id) {
+        // Sembunyikan semua section
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(s => s.classList.remove('active'));
+
+        // Tampilkan section yang dipilih
+        document.getElementById(id).classList.add('active');
+
+        // Scroll ke atas
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
